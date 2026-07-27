@@ -88,8 +88,12 @@ def he_init(shape, fan_in, seed):
     std = he_std((fan_in))
     return np.random.normal(loc=0.0, scale=std, size=shape).astype(np.float64)
 
-# Step 12 - init_zero_bias (not yet solved)
-# TODO: implement
+# Step 12 - init_zero_bias
+import numpy as np
+
+def init_zero_bias(length):
+    # TODO: return a 1D float array of zeros with the given length.
+    return np.zeros(length, dtype=np.float64)
 
 # Step 13 - pad_2d (not yet solved)
 # TODO: implement
