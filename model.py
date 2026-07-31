@@ -130,8 +130,29 @@ def im2col(images, kernel_h, kernel_w, stride, padding):
             
     return cols.transpose(0, 4, 5, 1, 2, 3).reshape(N * out_h * out_w, C * kernel_h * kernel_w)
 
-# Step 16 - col2im (not yet solved)
-# TODO: implement
+# Step 16 - col2im
+def col2im(cols, input_shape, kernel_h, kernel_w, stride, padding):
+    N, C, H, W = input_shape
+    out_h = output_spatial_size(H, kernel_h, stride, padding)
+    out_w = output_spatial_size(W, kernel_w, stride, padding)
+
+    cols_reshaped = cols.reshape(N, out_h, out_w, C, kernel_h, kernel_w)
+    cols_reshaped = cols_reshaped.transpose(0, 3, 4, 5, 1, 2)
+
+    H_padded = H + 2 * padding
+    W_padded = W + 2 * padding
+    images_padded = np.zeros((N, C, H_padded, W_padded), dtype=cols.dtype)
+
+    for y in range(kernel_h):
+        y_max = y + stride * out_h
+        for x in range(kernel_w):
+            x_max = x + stride * out_w
+            images_padded[:, :, y:y_max:stride, x:x_max:stride] += cols_reshaped[:, :, y, x, :, :]
+
+    if padding == 0:
+        return images_padded
+
+    return images_padded[:, :, padding:-padding, padding:-padding]
 
 # Step 17 - conv2d_forward (not yet solved)
 # TODO: implement
