@@ -103,7 +103,7 @@ def pad_2d(images, pad):
 
 # Step 14 - output_spatial_size
 def output_spatial_size(input_size, kernel, stride, padding):
-    # TODO: return the conv/pool output spatial dimension from input_size, kernel, stride, padding
+    
     return (input_size - kernel + 2 * padding) // stride + 1
 
 # Step 15 - im2col
