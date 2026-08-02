@@ -344,8 +344,12 @@ def linear_forward(x, weights, bias):
     
     return out, cache
 
-# Step 30 - linear_grad_input (not yet solved)
-# TODO: implement
+# Step 30 - linear_grad_input
+def linear_grad_input(d_out, cache):
+    weights = cache['weights']
+    dx = d_out @ weights.T
+    
+    return dx
 
 # Step 31 - linear_grad_weights (not yet solved)
 # TODO: implement
