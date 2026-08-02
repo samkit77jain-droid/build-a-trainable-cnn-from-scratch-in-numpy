@@ -317,8 +317,13 @@ def relu_forward(x):
 
     return out, cache
 
-# Step 26 - relu_backward (not yet solved)
-# TODO: implement
+# Step 26 - relu_backward
+def relu_backward(d_out, cache):
+    x = cache['x']
+    mask = x > 0
+    dx = d_out * mask
+    
+    return dx
 
 # Step 27 - flatten_forward (not yet solved)
 # TODO: implement
