@@ -309,10 +309,7 @@ def maxpool2d_backward(d_out, cache):
 
 # Step 25 - relu_forward
 def relu_forward(x):
-    # Elementwise ReLU
     out = np.maximum(0, x)
-
-    # Cache must be a dict with key 'x'
     cache = {"x": x}
 
     return out, cache
