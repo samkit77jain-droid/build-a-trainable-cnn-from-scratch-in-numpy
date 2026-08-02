@@ -352,8 +352,6 @@ def linear_grad_input(d_out, cache):
     return dx
 
 # Step 31 - linear_grad_weights
-import numpy as np
-
 def linear_grad_weights(x, dout):
     dW = x.T @ dout
     
