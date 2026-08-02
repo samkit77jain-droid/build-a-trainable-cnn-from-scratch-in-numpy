@@ -420,8 +420,9 @@ def adam_bias_correct(moment, beta, t):
     # TODO: return moment divided by (1 - beta**t) to undo Adam's zero-init bias.
     return moment / (1 - beta**t)
 
-# Step 40 - adam_param_step (not yet solved)
-# TODO: implement
+# Step 40 - adam_param_step
+def adam_param_step(param, m_hat, v_hat, lr, eps):
+    return param - lr * m_hat / (np.sqrt(v_hat) + eps)
 
 # Step 41 - adam_step (not yet solved)
 # TODO: implement
