@@ -205,8 +205,17 @@ def conv2d_grad_input(d_out, cache):
 
     return dx
 
-# Step 19 - conv2d_grad_weights (not yet solved)
-# TODO: implement
+# Step 19 - conv2d_grad_weights
+def conv2d_grad_weights(d_out, cache):
+    cols = cache["cols"]
+    weights = cache["weights"]
+
+    F, C_in, kH, kW = weights.shape
+    d_out_reshaped = d_out.transpose(0, 2, 3, 1).reshape(-1, F)
+    dW_col = cols.T @ d_out_reshaped
+    dW = dW_col.T.reshape(F, C_in, kH, kW)
+
+    return dW
 
 # Step 20 - conv2d_grad_bias (not yet solved)
 # TODO: implement
