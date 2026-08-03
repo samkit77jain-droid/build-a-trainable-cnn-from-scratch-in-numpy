@@ -448,8 +448,15 @@ def init_conv_layer(out_channels, in_channels, kernel_size, seed=0):
 
     return {'W': W, 'b': b}
 
-# Step 43 - init_linear_layer (not yet solved)
-# TODO: implement
+# Step 43 - init_linear_layer
+def init_linear_layer(in_features, out_features, seed=0):
+    fan_in = in_features
+    weight_shape = (in_features, out_features)
+
+    W = he_init(weight_shape, fan_in, seed)
+    b = init_zero_bias(out_features)
+
+    return {'W': W, 'b': b}
 
 # Step 44 - init_lenet (not yet solved)
 # TODO: implement
