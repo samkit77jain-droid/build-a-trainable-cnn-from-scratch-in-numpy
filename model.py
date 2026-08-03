@@ -458,8 +458,39 @@ def init_linear_layer(in_features, out_features, seed=0):
 
     return {'W': W, 'b': b}
 
-# Step 44 - init_lenet (not yet solved)
-# TODO: implement
+# Step 44 - init_lenet
+def init_lenet(in_channels, num_classes, seed=0):
+    params = {}
+
+    # Convolution layers
+    params['conv1'] = init_conv_layer(
+        out_channels=6,
+        in_channels=in_channels,
+        kernel_size=5,
+        seed=seed
+    )
+
+    params['conv2'] = init_conv_layer(
+        out_channels=16,
+        in_channels=6,
+        kernel_size=5,
+        seed=seed + 1
+    )
+
+    # Fully connected layers
+    params['fc1'] = init_linear_layer(
+        in_features=16 * 4 * 4,
+        out_features=120,
+        seed=seed + 2
+    )
+
+    params['fc2'] = init_linear_layer(
+        in_features=120,
+        out_features=num_classes,
+        seed=seed + 3
+    )
+
+    return params
 
 # Step 45 - forward_conv_block (not yet solved)
 # TODO: implement
