@@ -759,6 +759,8 @@ def train_loop(params, x, y,
 
     return params, loss_history
 
-# Step 59 - evaluate (not yet solved)
-# TODO: implement
+# Step 59 - evaluate
+def evaluate(params, x, y):
+    preds = lenet_predict(x, params)
+    return float(np.mean(preds == y))
 
