@@ -626,8 +626,17 @@ def lenet_predict(x, params):
     logits, _ = lenet_forward(x, params)
     return np.argmax(logits, axis=1).astype(int)
 
-# Step 52 - build_synthetic_image_dataset (not yet solved)
-# TODO: implement
+# Step 52 - build_synthetic_image_dataset
+def build_synthetic_image_dataset(num_samples, num_classes, image_size, in_channels=1, seed=0):
+    rng = np.random.default_rng(seed)
+    # Labels uniformly in [0, num_classes)
+    y = rng.integers(0, num_classes, size=num_samples)
+    # Images: (N, C, H, W)
+    x = rng.standard_normal((num_samples, in_channels, image_size, image_size))
+    # Shift by k - (num_classes - 1)/2, broadcast over C, H, W
+    shifts = (y.astype(float) - (num_classes - 1) / 2.0).reshape(num_samples, 1, 1, 1)
+    x = x + shifts
+    return x, y
 
 # Step 53 - shuffle_indices (not yet solved)
 # TODO: implement
