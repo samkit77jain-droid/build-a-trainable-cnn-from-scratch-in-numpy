@@ -608,17 +608,10 @@ def backward_classifier_block(dlogits, cache):
 
 # Step 50 - lenet_backward
 def lenet_backward(dlogits, caches):
-    # 1. Backprop through the classifier block
     grads_cls = backward_classifier_block(dlogits, caches['classifier'])
     dout2 = grads_cls['dx']
-
-    # 2. Backprop through conv block 2
     dout1, dW2, db2 = backward_conv_block(dout2, caches['block2'])
-
-    # 3. Backprop through conv block 1
     dx, dW1, db1 = backward_conv_block(dout1, caches['block1'])
-
-    # Assemble all gradients into a single dictionary
     grads = {
         'conv1': {'dW': dW1, 'db': db1},
         'conv2': {'dW': dW2, 'db': db2},
